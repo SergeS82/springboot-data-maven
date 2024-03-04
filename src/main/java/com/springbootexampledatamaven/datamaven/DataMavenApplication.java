@@ -22,13 +22,10 @@ public class DataMavenApplication {
 			repository.save(new User("Ivan","Ivanov"));
 			repository.save(new User("Petr", "Petrov"));
 			repository.save(new User("Sidr", "Sidorov"));
-
-			repository.deleteById(1L);
-
-			for (User user: repository.findByLastName("Petrov")) {
+			repository.softDelete(1L);
+			for (User user: repository.findAll()) {
 				System.out.println(user);
 			}
-
 		};
 	}
 

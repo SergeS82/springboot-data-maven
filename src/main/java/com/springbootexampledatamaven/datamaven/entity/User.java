@@ -1,15 +1,19 @@
 package com.springbootexampledatamaven.datamaven.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.DialectOverride;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "user")
+@Where(clause = "is_deleted = false")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
     private String lastName;
+    private boolean isDeleted;
 
     public User() {
     }
@@ -25,12 +29,14 @@ public class User {
         this.lastName = lastName;
     }
 
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", isDeleted=" + isDeleted +
                 '}';
     }
 }
